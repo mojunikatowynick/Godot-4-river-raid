@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhfpn6upyxp3k"]
+
+[ext_resource type="Script" path="res://scenes/brick.gd" id="1_q6o0c"]
+[ext_resource type="Texture2D" uid="uid://ccbqa1335wfo6" path="res://Grafika/Obstacles/brick/brick_expo.png" id="2_us0ef"]
+[ext_resource type="AudioStream" uid="uid://dcapq14hn0jrm" path="res://Sounds/hit_solid.wav" id="3_wco3i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h0l5n"]
+size = Vector2(50, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f208d"]
+size = Vector2(56, 24)
+
+[node name="Brick" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_q6o0c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_h0l5n")
+
+[node name="explosion" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+texture = ExtResource("2_us0ef")
+hframes = 9
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_wco3i")
+
+[node name="Collission" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collission"]
+shape = SubResource("RectangleShape2D_f208d")
+
+[connection signal="body_entered" from="Collission" to="." method="_on_collission_body_entered"]

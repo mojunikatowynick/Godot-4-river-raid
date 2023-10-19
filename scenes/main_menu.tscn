@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://c48jjof6xpods"]
+
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_ddy6e"]
+[ext_resource type="FontFile" uid="uid://comgcb60qvsk8" path="res://Grafika/Font/fires/FIRES PERSONAL USE.ttf" id="1_exalt"]
+
+[sub_resource type="Theme" id="Theme_2s3wi"]
+default_font = ExtResource("1_exalt")
+
+[sub_resource type="LabelSettings" id="LabelSettings_2hlwf"]
+font_size = 50
+shadow_size = 2
+shadow_color = Color(0.243137, 0.372549, 0.466667, 1)
+shadow_offset = Vector2(5.565, 8.53)
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_ddy6e")
+
+[node name="Control" type="MarginContainer" parent="."]
+modulate = Color(0.92549, 0.364706, 0.603922, 1)
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.3
+anchor_right = 0.8
+anchor_bottom = 0.4
+offset_top = 2.0
+offset_bottom = 129.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 2
+theme = SubResource("Theme_2s3wi")
+
+[node name="Title" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0.376471, 0.054902, 0.0431373, 1)
+text = "River Raid"
+label_settings = SubResource("LabelSettings_2hlwf")
+
+[node name="Play" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.243137, 0.372549, 0.466667, 1)
+text = "play"
+flat = true
+
+[node name="Controls" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.243137, 0.372549, 0.466667, 1)
+text = "controls"
+flat = true
+
+[node name="High Score" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.243137, 0.372549, 0.466667, 1)
+text = "hight Score"
+flat = true
+
+[node name="Exit" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.243137, 0.372549, 0.466667, 1)
+text = "Exit"
+flat = true
+
+[connection signal="pressed" from="Control/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/High Score" to="." method="_on_high_score_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://cr34hvv571wv2"]
+
+[ext_resource type="Texture2D" uid="uid://bofl0t8bcedk8" path="res://Grafika/light/circle.png" id="1_ek282"]
+[ext_resource type="Script" path="res://scenes/bullet.gd" id="1_xc4db"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1jbqq"]
+radius = 2.82843
+
+[sub_resource type="Curve" id="Curve_3by6p"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0.463158), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_e7kaj"]
+curve = SubResource("Curve_3by6p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rgqkx"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 250.0
+initial_velocity_max = 250.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.2
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_e7kaj")
+color = Color(0.811765, 0, 0.286275, 1)
+
+[node name="bullet" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+collision_layer = 4
+collision_mask = 10
+script = ExtResource("1_xc4db")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1jbqq")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 1, 0.152941, 1)
+polygon = PackedVector2Array(0, -3, -3, 0, 0, 3, 3, 0)
+
+[node name="BulletLife" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="explosion" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.992157, 0.286275, 0, 1)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_ek282")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_rgqkx")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 1, 0.443137, 1)
+energy = 5.0
+texture = ExtResource("1_ek282")
+texture_scale = 0.05
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="BulletLife" to="." method="_on_bullet_life_timeout"]

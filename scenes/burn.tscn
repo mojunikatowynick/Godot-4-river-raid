@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4m36axmd3dmu"]
+
+[ext_resource type="Texture2D" uid="uid://bnlo7gwtp2bdx" path="res://Grafika/plane/burn/1.png" id="1_27loj"]
+[ext_resource type="Texture2D" uid="uid://cp5xdhrripvki" path="res://Grafika/plane/burn/2.png" id="2_x8oe0"]
+[ext_resource type="Texture2D" uid="uid://q24h0hygp2js" path="res://Grafika/plane/burn/3.png" id="3_l404v"]
+[ext_resource type="Texture2D" uid="uid://cyjag8tvisojy" path="res://Grafika/plane/burn/4.png" id="4_ya2oi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vb1bc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_27loj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_x8oe0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_l404v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ya2oi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="Burn" type="AnimatedSprite2D"]
+position = Vector2(0.5, 0)
+sprite_frames = SubResource("SpriteFrames_vb1bc")
+autoplay = "default"
+frame_progress = 0.674273
+offset = Vector2(0, 21.315)

@@ -1,0 +1,151 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0kh4vdtcopec"]
+
+[ext_resource type="FontFile" uid="uid://comgcb60qvsk8" path="res://Grafika/Font/fires/FIRES PERSONAL USE.ttf" id="1_8x23l"]
+[ext_resource type="PackedScene" uid="uid://dgt01ws0lsq0v" path="res://scenes/remap_button.tscn" id="2_7732s"]
+
+[sub_resource type="Theme" id="Theme_254u8"]
+default_font = ExtResource("1_8x23l")
+
+[sub_resource type="Theme" id="Theme_okwid"]
+default_font = ExtResource("1_8x23l")
+
+[node name="RemapMenu" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.8
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+modulate = Color(0.92549, 0.364706, 0.603922, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -106.0
+offset_right = 78.0
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_254u8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="LabelUp" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+text = "Up"
+
+[node name="LabelDown" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+text = "Down
+"
+
+[node name="LabelLeft" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+text = "Left"
+
+[node name="LabelRight" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+text = "Right"
+
+[node name="LabelPrimary" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+text = "Primary shot"
+
+[node name="LabelAlt" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+text = "alternative shot"
+
+[node name="LabelDodge" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+text = "Dodge"
+
+[node name="LabelBack" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+text = "back"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+
+[node name="RemapButtonUp" parent="Control/HBoxContainer/VBoxContainer2" instance=ExtResource("2_7732s")]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+
+[node name="RemapButtonDown" parent="Control/HBoxContainer/VBoxContainer2" instance=ExtResource("2_7732s")]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+action = "Move_down"
+
+[node name="RemapButtonLeft" parent="Control/HBoxContainer/VBoxContainer2" instance=ExtResource("2_7732s")]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+action = "Move_left"
+
+[node name="RemapButtonRight" parent="Control/HBoxContainer/VBoxContainer2" instance=ExtResource("2_7732s")]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+action = "Move_right"
+
+[node name="RemapButtonPrimary" parent="Control/HBoxContainer/VBoxContainer2" instance=ExtResource("2_7732s")]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+action = "Shoot"
+
+[node name="RemapButtonAlt" parent="Control/HBoxContainer/VBoxContainer2" instance=ExtResource("2_7732s")]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+action = "Alt_shoot"
+
+[node name="RemapButtonDodge" parent="Control/HBoxContainer/VBoxContainer2" instance=ExtResource("2_7732s")]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+action = "Dodge"
+
+[node name="RemapButtonBack" parent="Control/HBoxContainer/VBoxContainer2" instance=ExtResource("2_7732s")]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+action = "Back"
+
+[node name="Control2" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.9
+anchor_right = 0.5
+anchor_bottom = 0.9
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Button" type="Button" parent="Control2"]
+modulate = Color(0.92549, 0.364706, 0.603922, 1)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+theme = SubResource("Theme_okwid")
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.243137, 0.372549, 0.466667, 1)
+text = "Back"
+flat = true
+
+[connection signal="pressed" from="Control2/Button" to="Control/HBoxContainer/VBoxContainer2/RemapButtonUp" method="_on_button_pressed"]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://xqcowij3oey4"]
+
+[ext_resource type="PackedScene" uid="uid://djojdixwrfkjp" path="res://scenes/plane.tscn" id="1_ey4dl"]
+[ext_resource type="Script" path="res://scenes/level_1.gd" id="1_swk4s"]
+[ext_resource type="PackedScene" uid="uid://bhfpn6upyxp3k" path="res://scenes/brick.tscn" id="3_qrn67"]
+[ext_resource type="PackedScene" uid="uid://bcmnpyvksge6i" path="res://scenes/ui.tscn" id="4_n6tup"]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_swk4s")
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="Brick" parent="." instance=ExtResource("3_qrn67")]
+position = Vector2(482, 324)
+
+[node name="Brick2" parent="." instance=ExtResource("3_qrn67")]
+position = Vector2(444, 263)
+
+[node name="Brick3" parent="." instance=ExtResource("3_qrn67")]
+position = Vector2(539, 195)
+
+[node name="Brick4" parent="." instance=ExtResource("3_qrn67")]
+position = Vector2(614, 321)
+
+[node name="UI" parent="." instance=ExtResource("4_n6tup")]
+
+[node name="Plane" parent="." instance=ExtResource("1_ey4dl")]
+position = Vector2(640, 550)
+
+[connection signal="gun_shoot" from="Plane" to="." method="_on_plane_gun_shoot"]
