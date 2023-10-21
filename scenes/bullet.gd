@@ -4,9 +4,7 @@ var speed: int = 900
 var direction: Vector2 = Vector2.UP
 
 func _physics_process(delta):
-	
 	position += speed * delta * direction
-
 
 func _on_body_entered(body):
 	if "hit" in body:
@@ -17,7 +15,6 @@ func _on_body_entered(body):
 	$PointLight2D.energy = 100
 	await get_tree().create_timer(0.2).timeout
 	queue_free()
-
 
 func _on_bullet_life_timeout():
 	queue_free()
