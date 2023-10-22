@@ -5,13 +5,10 @@ var gun_ready: bool = true
 var game_on: bool = true
 signal gun_shoot(gun_marker)
 
-
 @onready var animation_player = $AnimationPlayer
 @onready var sprite = $Sprite2D
 @onready var burn = $Animations/Burn
-
 	
-
 func _process(_delta):
 	if game_on:
 		var direction = Input.get_vector("Move_left", "Move_right", "Move_up","Move_down")
@@ -25,16 +22,12 @@ func _process(_delta):
 		else:
 			animation_player.play("idle")
 		
-
-
-	
 	if Input.is_action_pressed("Shoot") and gun_ready:
 		var gun_marker = $Marker/Gun
 		gun_shoot.emit(gun_marker.global_position)
 		gun_ready = false
 		Global.gun_ammo -= 1
 		$Timer/GunTimer.start()
-		
 		
 	var tween = get_tree().create_tween()
 	
@@ -46,7 +39,6 @@ func _process(_delta):
 func destroy():
 	game_on = false
 	animation_player.play("explosion")
-
 	
 func _on_gun_timer_timeout():
 	gun_ready = true

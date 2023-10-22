@@ -3,6 +3,9 @@ extends Area2D
 var speed: int = 900
 var direction: Vector2 = Vector2.UP
 
+func _ready():
+	$BulletLife.start()
+
 func _physics_process(delta):
 	position += speed * delta * direction
 

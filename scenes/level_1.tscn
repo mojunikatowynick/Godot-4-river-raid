@@ -1,30 +1,71 @@
-[gd_scene load_steps=5 format=3 uid="uid://xqcowij3oey4"]
+[gd_scene load_steps=10 format=3 uid="uid://xqcowij3oey4"]
 
 [ext_resource type="PackedScene" uid="uid://djojdixwrfkjp" path="res://scenes/plane.tscn" id="1_ey4dl"]
 [ext_resource type="Script" path="res://scenes/level_1.gd" id="1_swk4s"]
-[ext_resource type="PackedScene" uid="uid://bhfpn6upyxp3k" path="res://scenes/brick.tscn" id="3_qrn67"]
+[ext_resource type="PackedScene" uid="uid://n7o25lpppw28" path="res://scenes/background_1.tscn" id="4_f7d50"]
 [ext_resource type="PackedScene" uid="uid://bcmnpyvksge6i" path="res://scenes/ui.tscn" id="4_n6tup"]
 
-[node name="Level1" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i1awm"]
+size = Vector2(170, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r1qro"]
+size = Vector2(26, 654)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q4px0"]
+size = Vector2(26, 644)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_76tne"]
+size = Vector2(1302, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bu213"]
+size = Vector2(1274, 20)
+
+[node name="Level1" type="Node2D" groups=["bg"]]
 script = ExtResource("1_swk4s")
 
+[node name="Area2D" type="Area2D" parent="." groups=["bg"]]
+collision_layer = 64
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(640, -100)
+shape = SubResource("RectangleShape2D_i1awm")
+
+[node name="SpawnMarker" type="Marker2D" parent="."]
+position = Vector2(640, 0)
+
+[node name="SpawnBGArea" type="Node2D" parent="."]
+
+[node name="Background1" parent="SpawnBGArea" instance=ExtResource("4_f7d50")]
+position = Vector2(640, 640)
+
 [node name="Projectiles" type="Node2D" parent="."]
-
-[node name="Brick" parent="." instance=ExtResource("3_qrn67")]
-position = Vector2(482, 324)
-
-[node name="Brick2" parent="." instance=ExtResource("3_qrn67")]
-position = Vector2(444, 263)
-
-[node name="Brick3" parent="." instance=ExtResource("3_qrn67")]
-position = Vector2(539, 195)
-
-[node name="Brick4" parent="." instance=ExtResource("3_qrn67")]
-position = Vector2(614, 321)
 
 [node name="UI" parent="." instance=ExtResource("4_n6tup")]
 
 [node name="Plane" parent="." instance=ExtResource("1_ey4dl")]
 position = Vector2(640, 550)
 
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D"]
+position = Vector2(0, 320)
+shape = SubResource("RectangleShape2D_r1qro")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls/StaticBody2D"]
+position = Vector2(1280, 320)
+shape = SubResource("RectangleShape2D_q4px0")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls/StaticBody2D"]
+position = Vector2(640, 0)
+shape = SubResource("RectangleShape2D_76tne")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls/StaticBody2D"]
+position = Vector2(640, 640)
+shape = SubResource("RectangleShape2D_bu213")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="gun_shoot" from="Plane" to="." method="_on_plane_gun_shoot"]
