@@ -5,8 +5,7 @@ signal plane_crash
 signal game_over
 
 var plane_life = 100
-var scroll_speed = 100
-var background_on: bool = true
+var scroll_speed = 50
 
 var player_life = 1:
 	set(value):

@@ -35,7 +35,7 @@ func _process(_delta):
 		tween.tween_property(burn, "scale", Vector2(0.4, 1.2), 0.2)
 	else:
 		tween.tween_property(burn, "scale", Vector2(0.4, 0.4), 0.2)
-
+		
 func destroy():
 	game_on = false
 	animation_player.play("explosion")

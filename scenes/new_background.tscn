@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://btu8k871kev12"]
+
+[ext_resource type="Texture2D" uid="uid://2i2ebqsjgtwu" path="res://Grafika/background/bg1.png" id="1_dpikr"]
+[ext_resource type="Script" path="res://scenes/new_background.gd" id="1_lv664"]
+
+[node name="NewBackground" type="ParallaxBackground"]
+script = ExtResource("1_lv664")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(0, 1280)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(640, 0)
+texture = ExtResource("1_dpikr")

@@ -1,12 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://xqcowij3oey4"]
+[gd_scene load_steps=9 format=3 uid="uid://xqcowij3oey4"]
 
 [ext_resource type="PackedScene" uid="uid://djojdixwrfkjp" path="res://scenes/plane.tscn" id="1_ey4dl"]
 [ext_resource type="Script" path="res://scenes/level_1.gd" id="1_swk4s"]
-[ext_resource type="PackedScene" uid="uid://n7o25lpppw28" path="res://scenes/background_1.tscn" id="4_f7d50"]
+[ext_resource type="PackedScene" uid="uid://btu8k871kev12" path="res://scenes/new_background.tscn" id="2_kas4b"]
 [ext_resource type="PackedScene" uid="uid://bcmnpyvksge6i" path="res://scenes/ui.tscn" id="4_n6tup"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i1awm"]
-size = Vector2(170, 39)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r1qro"]
 size = Vector2(26, 654)
@@ -20,24 +17,10 @@ size = Vector2(1302, 26)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bu213"]
 size = Vector2(1274, 20)
 
-[node name="Level1" type="Node2D" groups=["bg"]]
+[node name="Level1" type="Node2D"]
 script = ExtResource("1_swk4s")
 
-[node name="Area2D" type="Area2D" parent="." groups=["bg"]]
-collision_layer = 64
-collision_mask = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(640, -100)
-shape = SubResource("RectangleShape2D_i1awm")
-
-[node name="SpawnMarker" type="Marker2D" parent="."]
-position = Vector2(640, 0)
-
-[node name="SpawnBGArea" type="Node2D" parent="."]
-
-[node name="Background1" parent="SpawnBGArea" instance=ExtResource("4_f7d50")]
-position = Vector2(640, 640)
+[node name="NewBackground" parent="." instance=ExtResource("2_kas4b")]
 
 [node name="Projectiles" type="Node2D" parent="."]
 
@@ -67,5 +50,4 @@ shape = SubResource("RectangleShape2D_76tne")
 position = Vector2(640, 640)
 shape = SubResource("RectangleShape2D_bu213")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="gun_shoot" from="Plane" to="." method="_on_plane_gun_shoot"]
