@@ -5,7 +5,10 @@ signal plane_crash
 signal game_over
 
 var plane_life = 100
-var scroll_speed = 50
+
+@onready var base_speed = 50
+@onready var speed_multiplayer = 1
+@onready var scroll_speed = base_speed * speed_multiplayer
 
 var player_life = 1:
 	set(value):

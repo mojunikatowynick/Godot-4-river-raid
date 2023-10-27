@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://btu8k871kev12"]
+[gd_scene load_steps=3 format=3 uid="uid://blpcrh2yrysb0"]
 
 [ext_resource type="Texture2D" uid="uid://2i2ebqsjgtwu" path="res://Grafika/background/bg1.png" id="1_dpikr"]
 [ext_resource type="Script" path="res://scenes/new_background.gd" id="1_lv664"]
