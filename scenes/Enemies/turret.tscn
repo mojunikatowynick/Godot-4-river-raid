@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://vpmo7nh55cad"]
+
+[ext_resource type="Texture2D" uid="uid://ybo6tobqwtue" path="res://Grafika/Enemies/Turret1.png" id="1_0u0gq"]
+[ext_resource type="Script" path="res://scenes/Enemies/turret.gd" id="1_136x2"]
+[ext_resource type="Script" path="res://scenes/Enemies/TurretBody.gd" id="3_4dxtg"]
+[ext_resource type="AudioStream" uid="uid://dcapq14hn0jrm" path="res://Sounds/hit_solid.wav" id="3_ilwg0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7yw8m"]
+
+[node name="Turret" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_136x2")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ilwg0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7yw8m")
+
+[node name="GunTimerTurret" type="Timer" parent="."]
+wait_time = 1.2
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="TurretBody" type="Node2D" parent="."]
+script = ExtResource("3_4dxtg")
+
+[node name="Sprite2D" type="Sprite2D" parent="TurretBody"]
+rotation = -1.5708
+texture = ExtResource("1_0u0gq")
+
+[node name="GunMarkerTurret" type="Marker2D" parent="TurretBody"]
+position = Vector2(15, 0)
+
+[connection signal="timeout" from="GunTimerTurret" to="." method="_on_gun_timer_turret_timeout"]

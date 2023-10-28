@@ -5,6 +5,7 @@ signal plane_crash
 signal game_over
 
 var plane_life = 100
+var plane_pos: Vector2
 
 @onready var base_speed = 50
 @onready var speed_multiplayer = 1

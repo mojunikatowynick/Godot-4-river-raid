@@ -5,11 +5,15 @@ var gun_ready: bool = true
 var game_on: bool = true
 signal gun_shoot(gun_marker)
 
+
 @onready var animation_player = $AnimationPlayer
 @onready var sprite = $Sprite2D
 @onready var burn = $Animations/Burn
 	
 func _process(_delta):
+	
+	Global.plane_pos = global_position
+	
 	if game_on:
 		var direction = Input.get_vector("Move_left", "Move_right", "Move_up","Move_down")
 		velocity = direction * speed
