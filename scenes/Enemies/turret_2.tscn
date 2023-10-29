@@ -1,47 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0vl3eyuybhyh"]
+[gd_scene load_steps=6 format=3 uid="uid://b0vl3eyuybhyh"]
 
 [ext_resource type="Texture2D" uid="uid://ybo6tobqwtue" path="res://Grafika/Enemies/Turret1.png" id="1_nv7ll"]
+[ext_resource type="Script" path="res://scenes/Enemies/TurretBody.gd" id="2_t8eqa"]
 [ext_resource type="AudioStream" uid="uid://dcapq14hn0jrm" path="res://Sounds/hit_solid.wav" id="2_v528y"]
 
-[sub_resource type="GDScript" id="GDScript_xfhsb"]
+[sub_resource type="GDScript" id="GDScript_x31dh"]
 script/source = "extends CharacterBody2D
 
 var turret_life: int = 5
-var gun_ready_turret: bool = true
 
 @onready var bullet_scene = preload(\"res://scenes/bullet.tscn\")
-
-func _process(delta):
-	var b = bullet_scene.instantiate() as Area2D
-	owner.add_child(b)
-	b.transform = $GunMarkerTurret.global_transform
-
-
 
 func hit():
 	turret_life -= 1
 	$AudioStreamPlayer2D.play()
 
-func _on_gun_timer_turret_timeout():
-	gun_ready_turret = true
-	
-
+func _on_turret_body_turret_shoot(direction, pos):
+	if turret_life:
+		var bullet = bullet_scene.instantiate() as Area2D
+		bullet.direction = direction
+		bullet.position = pos
+		$projectiles.add_child(bullet)
+	else:
+		Global.score += 1
+		queue_free()
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7yw8m"]
 
-[node name="Turret" type="CharacterBody2D"]
+[node name="Turret2" type="CharacterBody2D"]
 position = Vector2(640, 320)
 collision_layer = 8
 collision_mask = 5
-script = SubResource("GDScript_xfhsb")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = -1.5708
-texture = ExtResource("1_nv7ll")
-
-[node name="GunMarkerTurret" type="Marker2D" parent="."]
-position = Vector2(50, 0)
+script = SubResource("GDScript_x31dh")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_v528y")
@@ -49,8 +40,19 @@ stream = ExtResource("2_v528y")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_7yw8m")
 
-[node name="GunTimerTurret" type="Timer" parent="."]
+[node name="GunTimerTurret2" type="Timer" parent="."]
 
 [node name="projectiles" type="Node2D" parent="."]
 
-[connection signal="timeout" from="GunTimerTurret" to="." method="_on_gun_timer_turret_timeout"]
+[node name="TurretBody" type="Node2D" parent="."]
+script = ExtResource("2_t8eqa")
+
+[node name="Sprite2D" type="Sprite2D" parent="TurretBody"]
+rotation = -1.5708
+texture = ExtResource("1_nv7ll")
+
+[node name="GunMarkerTurret" type="Marker2D" parent="TurretBody"]
+position = Vector2(50, 0)
+
+[connection signal="timeout" from="GunTimerTurret2" to="TurretBody" method="_on_gun_timer_turret_timeout"]
+[connection signal="turret_shoot" from="TurretBody" to="." method="_on_turret_body_turret_shoot"]

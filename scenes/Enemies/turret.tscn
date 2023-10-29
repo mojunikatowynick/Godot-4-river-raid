@@ -8,16 +8,22 @@ script/source = "extends CharacterBody2D
 
 var turret_life: int = 5
 var gun_ready_turret: bool = true
+signal turret_shoot(direction, pos)
 
-@onready var bullet_scene = preload(\"res://scenes/bullet.tscn\")
-
-func _process(delta):
-	var b = bullet_scene.instantiate() as Area2D
-	owner.add_child(b)
-	b.transform = $GunMarkerTurret.global_transform
-
-
-
+func _process(_delta):
+	if turret_life > 0:
+		look_at(Global.plane_pos)
+		if gun_ready_turret:
+			var turret_marker = $GunMarkerTurret
+			var direction: Vector2 = (Global.plane_pos - global_position).normalized()
+			var pos: Vector2 = turret_marker.global_position
+			turret_shoot.emit(direction, pos)
+			gun_ready_turret = false
+			$GunTimerTurret.start()
+	else:
+		Global.score += 1
+		queue_free()
+		
 func hit():
 	turret_life -= 1
 	$AudioStreamPlayer2D.play()
