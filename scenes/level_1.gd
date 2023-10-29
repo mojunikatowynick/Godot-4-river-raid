@@ -19,3 +19,9 @@ func _on_spawn_timer_timeout():
 	var new_wait_time = randi_range(1, 4)
 	$Timers/SpawnTimer.start(new_wait_time)
 	spawn_marker.position.x = randi_range(50,1230)
+	
+func _on_turret_turret_shoot(direction, pos):
+	var bullet = bullet_scene.instantiate() as Area2D
+	bullet.direction = direction
+	bullet.position = pos
+	$projectiles.add_child(bullet)

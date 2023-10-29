@@ -3,6 +3,7 @@ extends Node
 signal stat_changed
 signal plane_crash
 signal game_over
+signal turret_shoot(direction, pos)
 
 var plane_life = 100
 var plane_pos: Vector2
@@ -37,5 +38,7 @@ var score = 0:
 func _process(_delta):
 	if plane_life <= 0:
 		player_life -=1
+		
+
 
 

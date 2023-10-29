@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnmjhigda8lae"]
+[gd_scene load_steps=5 format=3 uid="uid://b0vl3eyuybhyh"]
 
-[ext_resource type="Texture2D" uid="uid://ybo6tobqwtue" path="res://Grafika/Enemies/Turret1.png" id="1_0u0gq"]
-[ext_resource type="AudioStream" uid="uid://dcapq14hn0jrm" path="res://Sounds/hit_solid.wav" id="3_ilwg0"]
+[ext_resource type="Texture2D" uid="uid://ybo6tobqwtue" path="res://Grafika/Enemies/Turret1.png" id="1_nv7ll"]
+[ext_resource type="AudioStream" uid="uid://dcapq14hn0jrm" path="res://Sounds/hit_solid.wav" id="2_v528y"]
 
 [sub_resource type="GDScript" id="GDScript_xfhsb"]
 script/source = "extends CharacterBody2D
@@ -38,13 +38,13 @@ script = SubResource("GDScript_xfhsb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = -1.5708
-texture = ExtResource("1_0u0gq")
+texture = ExtResource("1_nv7ll")
 
 [node name="GunMarkerTurret" type="Marker2D" parent="."]
 position = Vector2(50, 0)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_ilwg0")
+stream = ExtResource("2_v528y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_7yw8m")
