@@ -25,3 +25,4 @@ func _on_turret_turret_shoot(direction, pos):
 	bullet.direction = direction
 	bullet.position = pos
 	$projectiles.add_child(bullet)
+
