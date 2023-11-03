@@ -9,7 +9,8 @@ func hit():
 	turret_life -= 1
 	$AudioStreamPlayer2D.play()
 
-func _process(_delta):
+func _process(delta):
+	position.y += Global.scroll_speed*delta
 	if turret_life > 0:
 		var turret_marker = $TurretBody/GunMarker
 		var direction: Vector2 = (Global.plane_pos - global_position).normalized()
