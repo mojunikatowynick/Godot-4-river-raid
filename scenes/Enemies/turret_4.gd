@@ -22,11 +22,13 @@ func _process(delta):
 			$Projectiles.add_child(bullet)
 			$GunTimerTurret.start()
 			gun_ready_turret = false
-			print("turret4 pos", pos)
-			print("turret4 direction", direction)
+
 	else:
 		Global.score += 1
 		queue_free()
 
 func _on_gun_timer_turret_timeout():
 		gun_ready_turret = true
+
+func destroy_enemy():
+	turret_life = 0

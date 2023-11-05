@@ -37,3 +37,6 @@ func _on_detection_area_body_entered(_body):
 	
 func _on_detection_area_body_exited(_body):
 	player_near = false
+	
+func destroy_enemy():
+	$AnimationPlayer.play("Explosion")

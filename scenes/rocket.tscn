@@ -1,0 +1,115 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdgtxasl1fowj"]
+
+[ext_resource type="Script" path="res://Node2D.gd" id="1_8yydi"]
+[ext_resource type="Texture2D" uid="uid://bnqhnsa2bcmbx" path="res://Grafika/plane/rocket.png" id="2_2tua0"]
+[ext_resource type="Texture2D" uid="uid://d3dp4ul1qnxb6" path="res://Grafika/plane/Explosion.png" id="3_c222f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qyfn4"]
+size = Vector2(6, 8)
+
+[sub_resource type="Animation" id="Animation_hn86l"]
+resource_name = "Explosion"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Explosion:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_liv7q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_87ymo"]
+_data = {
+"Explosion": SubResource("Animation_hn86l"),
+"RESET": SubResource("Animation_liv7q")
+}
+
+[node name="Rocket" type="Area2D"]
+collision_layer = 4
+collision_mask = 10
+script = ExtResource("1_8yydi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_2tua0")
+
+[node name="Explosion" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_c222f")
+hframes = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_qyfn4")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_87ymo")
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

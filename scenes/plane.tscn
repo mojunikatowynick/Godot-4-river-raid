@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://djojdixwrfkjp"]
+[gd_scene load_steps=15 format=3 uid="uid://djojdixwrfkjp"]
 
 [ext_resource type="Script" path="res://scenes/plane.gd" id="1_627xr"]
 [ext_resource type="AudioStream" uid="uid://crkh12yhq7542" path="res://Sounds/explosion_sound.wav" id="2_cvqb4"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c4m36axmd3dmu" path="res://scenes/burn.tscn" id="4_vtpc5"]
 [ext_resource type="Texture2D" uid="uid://d3dp4ul1qnxb6" path="res://Grafika/plane/Explosion.png" id="5_1wwnk"]
 [ext_resource type="Texture2D" uid="uid://bofl0t8bcedk8" path="res://Grafika/light/circle.png" id="5_qqvmf"]
+[ext_resource type="Texture2D" uid="uid://cvprj51lwwjbj" path="res://Grafika/UI/crosshair002.png" id="6_iq3m5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jd3sc"]
 radius = 15.0333
@@ -28,6 +29,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_ua0vx"]
 resource_name = "explosion"
 length = 0.5
+loop_mode = 2
 step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -249,17 +251,29 @@ position = Vector2(0, 18.345)
 scale = Vector2(0.4, 0.52)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("CompressedTexture2D_650ax")
+texture = ExtResource("2_pr3mo")
+hframes = 4
 
 [node name="Marker" type="Node2D" parent="."]
 
 [node name="Gun" type="Marker2D" parent="Marker"]
 position = Vector2(0, -20.455)
 
+[node name="Aim" type="Marker2D" parent="Marker"]
+position = Vector2(0, -150)
+scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker/Aim"]
+texture = ExtResource("6_iq3m5")
+
 [node name="Timer" type="Node2D" parent="."]
 
 [node name="GunTimer" type="Timer" parent="Timer"]
-wait_time = 0.1
+wait_time = 0.5
+one_shot = true
+
+[node name="rocketTimer" type="Timer" parent="Timer"]
+wait_time = 3.0
 one_shot = true
 
 [node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
@@ -267,3 +281,4 @@ stream = ExtResource("2_cvqb4")
 pitch_scale = 0.73
 
 [connection signal="timeout" from="Timer/GunTimer" to="." method="_on_gun_timer_timeout"]
+[connection signal="timeout" from="Timer/rocketTimer" to="." method="_on_rocket_timer_timeout"]

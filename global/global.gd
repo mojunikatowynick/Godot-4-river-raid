@@ -5,7 +5,7 @@ signal plane_crash
 signal game_over
 signal turret_shoot(direction, pos)
 
-var plane_life = 100
+
 var plane_pos: Vector2
 
 @onready var base_speed = 50
@@ -27,7 +27,7 @@ var gun_ammo = 1000:
 
 var rocket_ammo = 3:
 	set(value):
-		gun_ammo = value
+		rocket_ammo = value
 		stat_changed.emit()
 
 var score = 0:
@@ -38,7 +38,11 @@ var score = 0:
 func _process(_delta):
 	if plane_life <= 0:
 		player_life -=1
-		
+	
+var plane_life = 100:
+	set(value):
+		plane_life = value
+		stat_changed.emit()
 
 
 
