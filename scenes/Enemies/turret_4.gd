@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var turret_life: int = 5
-var gun_ready_turret: bool = true
+@export var gun_ready_turret: bool = false
 
 @onready var bullet_scene = preload("res://scenes/bullet.tscn")
 
@@ -10,7 +10,8 @@ func hit():
 	$AudioStreamPlayer2D.play()
 
 func _process(delta):
-	position.y += Global.scroll_speed*delta
+#	position.y += Global.scroll_speed*delta
+
 	if turret_life > 0:
 		var turret_marker = $TurretBody/GunMarker
 		var direction: Vector2 = (Global.plane_pos - global_position).normalized()

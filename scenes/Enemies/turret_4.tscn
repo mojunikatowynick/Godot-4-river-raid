@@ -8,6 +8,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_mcdj2"]
 
 [node name="Turret4" type="CharacterBody2D"]
+scale = Vector2(2, 2)
 collision_layer = 8
 collision_mask = 5
 script = ExtResource("1_da6ud")

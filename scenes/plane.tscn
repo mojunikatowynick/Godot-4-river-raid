@@ -29,7 +29,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_ua0vx"]
 resource_name = "explosion"
 length = 0.5
-loop_mode = 2
 step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -222,6 +221,7 @@ _data = {
 }
 
 [node name="Plane" type="CharacterBody2D"]
+scale = Vector2(1.7, 1.7)
 collision_mask = 30
 script = ExtResource("1_627xr")
 
@@ -269,10 +269,10 @@ texture = ExtResource("6_iq3m5")
 [node name="Timer" type="Node2D" parent="."]
 
 [node name="GunTimer" type="Timer" parent="Timer"]
-wait_time = 0.5
+wait_time = 0.2
 one_shot = true
 
-[node name="rocketTimer" type="Timer" parent="Timer"]
+[node name="RocketTimer" type="Timer" parent="Timer"]
 wait_time = 3.0
 one_shot = true
 
@@ -281,4 +281,4 @@ stream = ExtResource("2_cvqb4")
 pitch_scale = 0.73
 
 [connection signal="timeout" from="Timer/GunTimer" to="." method="_on_gun_timer_timeout"]
-[connection signal="timeout" from="Timer/rocketTimer" to="." method="_on_rocket_timer_timeout"]
+[connection signal="timeout" from="Timer/RocketTimer" to="." method="_on_rocket_timer_timeout"]
