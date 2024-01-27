@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://drwb50yppa8ux"]
+
+[ext_resource type="Texture2D" uid="uid://fymgvpc3m20u" path="res://Graphics/testbro.png" id="1_6wm5p"]
+[ext_resource type="Script" path="res://Scenes/bro.gd" id="1_ypumr"]
+[ext_resource type="Script" path="res://Scenes/StateMachine.gd" id="3_r5pbm"]
+[ext_resource type="Script" path="res://Scenes/Idle.gd" id="4_vnxf4"]
+[ext_resource type="Script" path="res://Scenes/Walk.gd" id="5_3s0a8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l4bn5"]
+size = Vector2(64, 64)
+
+[node name="Bro" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_ypumr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6wm5p")
+hframes = 4
+frame = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_l4bn5")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("3_r5pbm")
+state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_vnxf4")
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("5_3s0a8")

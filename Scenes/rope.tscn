@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://bswl8qwj2wfar"]
+
+[ext_resource type="Script" path="res://Scenes/rope.gd" id="1_8cnbj"]
+[ext_resource type="Texture2D" uid="uid://dr1qp0wnp4qh0" path="res://Graphics/testtile.png" id="1_eavbd"]
+[ext_resource type="PackedScene" uid="uid://75wt25yr1jle" path="res://Scenes/rope_p.tscn" id="3_yumqk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m4i1s"]
+size = Vector2(64, 64)
+
+[node name="Rope" type="StaticBody2D"]
+collision_layer = 2
+script = ExtResource("1_8cnbj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_eavbd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_m4i1s")
+
+[node name="pin0" type="PinJoint2D" parent="."]
+position = Vector2(0, 32.695)
+node_a = NodePath("..")
+node_b = NodePath("../RopeP")
+
+[node name="RopeP" parent="." instance=ExtResource("3_yumqk")]
+position = Vector2(0, 65)
+
+[node name="pin1" type="PinJoint2D" parent="."]
+position = Vector2(0, 97.53)
+node_a = NodePath("../RopeP")
+node_b = NodePath("../RopeP2")
+
+[node name="RopeP2" parent="." instance=ExtResource("3_yumqk")]
+position = Vector2(0, 130)
+
+[node name="pin2" type="PinJoint2D" parent="."]
+position = Vector2(0, 162.135)
+node_a = NodePath("../RopeP2")
+node_b = NodePath("../RopeP3")
+
+[node name="RopeP3" parent="." instance=ExtResource("3_yumqk")]
+position = Vector2(0, 195)
+
+[node name="pin3" type="PinJoint2D" parent="."]
+position = Vector2(0, 226.725)
+node_a = NodePath("../RopeP3")
+node_b = NodePath("../RopeP4")
+
+[node name="RopeP4" parent="." instance=ExtResource("3_yumqk")]
+position = Vector2(0, 260)
+
+[node name="pin4" type="PinJoint2D" parent="."]
+position = Vector2(0, 291.515)
+node_a = NodePath("../RopeP4")
+node_b = NodePath("../RopeP5")
+
+[node name="RopeP5" parent="." instance=ExtResource("3_yumqk")]
+position = Vector2(0, 325)

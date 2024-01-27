@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://drwb50yppa8ux"]
+
+[ext_resource type="Texture2D" uid="uid://fymgvpc3m20u" path="res://Graphics/testbro.png" id="1_6wm5p"]
+[ext_resource type="Script" path="res://Scenes/bro.gd" id="1_ypumr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l4bn5"]
+size = Vector2(64, 64)
+
+[node name="Bro" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_ypumr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6wm5p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_l4bn5")

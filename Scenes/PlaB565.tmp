@@ -1,0 +1,63 @@
+[gd_scene load_steps=11 format=3 uid="uid://cxq40x0r0ntw7"]
+
+[ext_resource type="Texture2D" uid="uid://fymgvpc3m20u" path="res://Graphics/testbro.png" id="1_c1t6f"]
+[ext_resource type="Script" path="res://Scenes/Player.gd" id="1_d6pjj"]
+[ext_resource type="Script" path="res://Scenes/StateMachine.gd" id="3_utm3a"]
+[ext_resource type="Script" path="res://Scenes/States/Walk.gd" id="4_4d4vp"]
+[ext_resource type="Script" path="res://Scenes/States/Air.gd" id="5_egt01"]
+[ext_resource type="Script" path="res://Scenes/States/Hang.gd" id="6_pn4ne"]
+[ext_resource type="Script" path="res://Scenes/States/LedgeHang.gd" id="7_ed2r7"]
+[ext_resource type="Script" path="res://Scenes/States/LineHang.gd" id="8_1qj4w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3teiu"]
+size = Vector2(62, 62)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0xsai"]
+radius = 27.77
+
+[node name="Bro" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_d6pjj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_c1t6f")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3teiu")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_utm3a")
+initial_state = NodePath("Walk")
+
+[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animator")]
+script = ExtResource("4_4d4vp")
+player = NodePath("../..")
+animator = NodePath("../../Sprite2D")
+
+[node name="Air" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animator")]
+script = ExtResource("5_egt01")
+player = NodePath("../..")
+animator = NodePath("../../Sprite2D")
+
+[node name="VinesHang" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animator")]
+script = ExtResource("6_pn4ne")
+player = NodePath("../..")
+animator = NodePath("../../Sprite2D")
+
+[node name="LedgeHang" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animator")]
+script = ExtResource("7_ed2r7")
+player = NodePath("../..")
+animator = NodePath("../../Sprite2D")
+
+[node name="LineHang" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animator")]
+script = ExtResource("8_1qj4w")
+player = NodePath("../..")
+animator = NodePath("../../Sprite2D")
+
+[node name="Detector" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
+shape = SubResource("CircleShape2D_0xsai")

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://75wt25yr1jle"]
+
+[ext_resource type="Script" path="res://Scenes/rope_p.gd" id="1_8vcau"]
+[ext_resource type="Texture2D" uid="uid://cgy0siwsebjt4" path="res://Graphics/ledge.png" id="1_one7h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w4jy6"]
+size = Vector2(10, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mlwli"]
+size = Vector2(10, 64)
+
+[node name="RopeP" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 6
+mass = 0.5
+script = ExtResource("1_8vcau")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.15625, 1)
+texture = ExtResource("1_one7h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w4jy6")
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+shape = SubResource("RectangleShape2D_mlwli")
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_player_detector_body_exited"]
